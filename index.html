@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mapbox iFrame Test</title>
+        <link rel="stylesheet" href="mapbox-dist/mapbox-gl.css">
+        <style>
+            .map-wrapper {
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .map-wrapper > label {
+                display: block;
+                font-weight: bold;
+            }
+
+            #the-frame,
+            #the-map {
+                height: 400px;
+                width: 400px;
+            }
+            #the-frame {
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="map-wrapper">
+            <label>Inside iFrame</label>
+            <iframe id="the-frame" src="iframeContents.html"></iframe>
+        </div>
+        <div class="map-wrapper">
+            <label>Outside iFrame</label>
+            <div id="the-map"></div>
+        </div>
+        <script src="mapbox-dist/mapbox-gl.js"></script>
+        <!-- <script src="mapbox-dist/mapbox-gl-dev.js"></script> -->
+        <!-- <script src="mapbox-dist/mapbox-gl-unminified.js"></script> -->
+        <script src="setAccessToken.js"></script>
+        <script>
+            var iframe = document.getElementById("the-frame"),
+                iframeDoc = iframe.contentDocument;
+
+            new mapboxgl.Map({
+                container: iframeDoc.getElementById("the-map"),
+                style: "mapbox://styles/mapbox/streets-v10",
+                center: [-78.901768, 35.980850],
+                zoom: 12
+            });
+
+            new mapboxgl.Map({
+                container: "the-map",
+                style: "mapbox://styles/mapbox/streets-v10",
+                center: [-78.901768, 35.980850],
+                zoom: 12
+            });
+        </script>
+    </body>
+</html>
